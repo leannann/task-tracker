@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
-	protected ArrayList<Integer> subtaskIds = new ArrayList<>();
+
+	private final List<Integer> subtaskIds = new ArrayList<>();
 
 	public Epic(int id, String name, String description) {
 		super(id, name, description, NEW);
@@ -17,18 +18,20 @@ public class Epic extends Task {
 	}
 
 	public void addSubtaskId(int id) {
+		if (id == this.id) return;
+		if (subtaskIds.contains(id)) return;
 		subtaskIds.add(id);
 	}
 
 	public List<Integer> getSubtaskIds() {
-		return subtaskIds;
+		return new ArrayList<>(subtaskIds);
 	}
 
-	public void cleanSubtaskIds() {
+	public void clearSubtaskIds() {
 		subtaskIds.clear();
 	}
 
-	public void removeSubtask(int id) {
+	public void removeSubtaskId(int id) {
 		subtaskIds.remove(Integer.valueOf(id));
 	}
 
@@ -43,3 +46,4 @@ public class Epic extends Task {
 				'}';
 	}
 }
+
